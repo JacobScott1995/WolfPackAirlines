@@ -2,6 +2,7 @@ package View;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -99,10 +100,17 @@ public class Display {
 
     private void destination(){
         Label label = new Label("Destination: ");
-        TextField textField = new TextField();
+        ChoiceBox<String> destinations = new ChoiceBox<>();
+        destinations.getItems().add("LA");
+        destinations.getItems().add("Candy Land");
+        destinations.getItems().add("Skyrim");
+        destinations.getItems().add("Wolf Den");
+
+        destinations.setValue("LA");
+
         Button desBtn = new Button("Submit");
         HBox hb = new HBox();
-        hb.getChildren().addAll(label, textField, desBtn);
+        hb.getChildren().addAll(label, destinations, desBtn);
         hb.setSpacing(10);
         hb.setLayoutY(180);
         displayPane.getChildren().add(hb);
