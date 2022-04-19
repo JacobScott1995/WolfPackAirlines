@@ -15,7 +15,7 @@ public class File_Writer {
 
 
     }
-
+    // Method to collect customer data and set to csv file
     public static void addCustomerData(ArrayList<String> arrstr) throws IOException {
         File file = new File("src/main/resources/Boarding_Pass_Data.csv");
 
