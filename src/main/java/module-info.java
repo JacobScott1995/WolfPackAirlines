@@ -11,6 +11,7 @@ module com.example.wolfpackairlines {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires org.testng;
+    requires com.opencsv;
 
     opens com.example.wolfpackairlines to javafx.fxml;
     exports com.example.wolfpackairlines;
