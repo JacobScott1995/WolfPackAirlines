@@ -36,52 +36,47 @@ public class Display {
     private void nameInput(){
         Label label = new Label("Name: ");
         TextField textField = new TextField();
-        Button nameBtn = new Button("Submit");
         HBox hb = new HBox();
-        hb.getChildren().addAll(label, textField, nameBtn);
+        hb.getChildren().addAll(label, textField);
         hb.setSpacing(10);
-        displayPane.getChildren().add(hb);
-    }
-
-    private void ageInput(){
-        Label label = new Label("Age: ");
-        TextField textField = new TextField();
-        Button ageBtn = new Button("Submit");
-        HBox hb = new HBox();
-        hb.getChildren().addAll(label, textField, ageBtn);
-        hb.setSpacing(10);
-        hb.setLayoutY(30);
         displayPane.getChildren().add(hb);
     }
 
     private void emailInput(){
         Label label = new Label("E-mail: ");
         TextField textField = new TextField();
-        Button emailBtn = new Button("Submit");
         HBox hb = new HBox();
-        hb.getChildren().addAll(label, textField, emailBtn);
+        hb.getChildren().addAll(label, textField);
         hb.setSpacing(10);
-        hb.setLayoutY(60);
+        hb.setLayoutY(30);
         displayPane.getChildren().add(hb);
     }
 
     private void phoneNumber(){
         Label label = new Label("Phone Number: ");
         TextField textField = new TextField();
-        Button phoneBtn = new Button("Submit");
         HBox hb = new HBox();
-        hb.getChildren().addAll(label, textField, phoneBtn);
+        hb.getChildren().addAll(label, textField);
         hb.setSpacing(10);
-        hb.setLayoutY(90);
+        hb.setLayoutY(60);
         displayPane.getChildren().add(hb);
     }
 
     private void genderInput(){
         Label label = new Label("Gender: ");
         TextField textField = new TextField();
-        Button genderBtn = new Button("Submit");
         HBox hb = new HBox();
-        hb.getChildren().addAll(label, textField, genderBtn);
+        hb.getChildren().addAll(label, textField);
+        hb.setSpacing(10);
+        hb.setLayoutY(90);
+        displayPane.getChildren().add(hb);
+    }
+
+    private void ageInput(){
+        Label label = new Label("Age: ");
+        TextField textField = new TextField();
+        HBox hb = new HBox();
+        hb.getChildren().addAll(label, textField);
         hb.setSpacing(10);
         hb.setLayoutY(120);
         displayPane.getChildren().add(hb);
@@ -90,9 +85,8 @@ public class Display {
     private void dateInput(){
         Label label = new Label("Date: ");
         TextField textField = new TextField();
-        Button dateBtn = new Button("Submit");
         HBox hb = new HBox();
-        hb.getChildren().addAll(label, textField, dateBtn);
+        hb.getChildren().addAll(label, textField);
         hb.setSpacing(10);
         hb.setLayoutY(150);
         displayPane.getChildren().add(hb);
@@ -107,10 +101,8 @@ public class Display {
         destinations.getItems().add("Wolf Den");
 
         destinations.setValue("LA");
-
-        Button desBtn = new Button("Submit");
         HBox hb = new HBox();
-        hb.getChildren().addAll(label, destinations, desBtn);
+        hb.getChildren().addAll(label, destinations);
         hb.setSpacing(10);
         hb.setLayoutY(180);
         displayPane.getChildren().add(hb);
