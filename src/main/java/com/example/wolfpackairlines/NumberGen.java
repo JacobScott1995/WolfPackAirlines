@@ -2,7 +2,7 @@ package com.example.wolfpackairlines;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -14,11 +14,10 @@ public class NumberGen {
 
     private static int UUID = 0;
 
-    public static int GenerateUnique() {
+    public static void GenerateUnique() {
         Random random = new Random();
         int max = 99999;
         UUID = random.nextInt(max);
-        return UUID;
     }
     public static boolean UniqueCheck(int CustomerID)
     {
@@ -33,10 +32,10 @@ public class NumberGen {
             {
                 PostParse.add(Integer.valueOf(nums));
             }
-                for (int i = 0; i < PostParse.size(); i++) {
-                    if (PostParse.get(i) == CustomerID) {
-                        return false;
-                    }
+            for (Integer integer : PostParse) {
+                if (integer == CustomerID) {
+                    return false;
+                }
             }
         }
         catch(IOException e)
@@ -71,7 +70,7 @@ public class NumberGen {
 
       GenerateUnique();
       
-       while(UniqueCheck(UUID) == false)
+       while(!UniqueCheck(UUID))
        {
            GenerateUnique();
        }
