@@ -29,5 +29,8 @@ class TicketDiscountTest {
         newPrice = test1.ticketDiscount(60,"Female", 185.75);
         assertEquals(55.72, newPrice);
 
+        newPrice = test1.ticketDiscount(25,"Male", 85.50);
+        assertEquals(85.50, newPrice);
+
     }
 }

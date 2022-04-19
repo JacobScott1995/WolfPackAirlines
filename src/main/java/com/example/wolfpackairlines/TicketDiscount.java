@@ -3,7 +3,7 @@ package com.example.wolfpackairlines;
 public class TicketDiscount {
 
     public double ticketDiscount(int age, String gender, double originalPrice) {
-        double newPrice = 0;
+        double newPrice;
         if (age <= 12) {
             newPrice = originalPrice - (originalPrice * .50);
             if (gender.equals("Female")) {
@@ -18,6 +18,9 @@ public class TicketDiscount {
         }
         else if (gender.equals("Female")) {
             newPrice = originalPrice - (originalPrice * .25);
+        }
+        else {
+            newPrice = originalPrice;
         }
 
         //truncates to two decimal values
