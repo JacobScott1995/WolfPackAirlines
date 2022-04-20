@@ -47,14 +47,14 @@ public class NumberGen {
 
     public static void FileInput(int UCID)
     {
-        String Unique = Integer.toString(UCID);
+        String unique = Integer.toString(UCID);
 
         if(UniqueCheck(UUID))
         {
             try
             {
                 FileWriter write = new FileWriter("src/main/resources/com/example/wolfpackairlines/Unique-Customer-ID's.txt", true);
-                write.write(Unique +  "\n");
+                write.write(unique +  "\n");
                 write.close();
             }
             catch(IOException e)

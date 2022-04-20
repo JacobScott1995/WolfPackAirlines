@@ -3,11 +3,9 @@ package com.example.wolfpackairlines;
 import com.opencsv.CSVWriter;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class File_Writer {
 
@@ -22,12 +20,8 @@ public class File_Writer {
         FileWriter outputfile = new FileWriter(file, true);
         CSVWriter writer = new CSVWriter(outputfile);
 
-
-        writer.writeAll((Iterable<String[]>) arrstr);
-
+       // writer.writeAll((Iterable<String[]>) arrstr);
 
         writer.close();
     }
-
-
 }
