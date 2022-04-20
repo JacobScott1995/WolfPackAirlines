@@ -26,6 +26,7 @@ public class Display {
     public Display(){
         displayPane = new AnchorPane();
         displayScene = new Scene(displayPane, SceneController.WIDTH,SceneController.HEIGHT);
+        displayScene.getRoot().setStyle("-fx-font-family: 'serif'");
         setTitle();
         setDivPos();
         addLogo();
