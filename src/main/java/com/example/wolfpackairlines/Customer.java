@@ -1,8 +1,8 @@
 package com.example.wolfpackairlines;
 
 public class Customer {
-    private String First_Name;
-    private String Last_Name;
+
+    private String Name;
     private String flight;
     private String Email;
     private String PhoneNumber;
@@ -12,33 +12,29 @@ public class Customer {
     private double TotalPrice;
     private int BoardingPassNumber;
     private int Age;
+    private String date;
 
 
 
-    public String getFirst_Name()
-    {
-        return this.First_Name;
+
+
+    public String getDate() {
+        return date;
     }
 
-    public void setFirst_Name(String First_Name)
-    {
-        this.First_Name = First_Name;
+    public void setDate(String date) {
+        this.date = date;
     }
-
-    public String getLast_Name()
-    {
-        return this.Last_Name;
-    }
-
-    public void setLast_Name(String Last_Name)
-    {
-        this.Last_Name = Last_Name;
-    }
-
     public String getFlight() {
         return flight;
     }
+    public String getName() {
+        return Name;
+    }
 
+    public void setName(String name) {
+        Name = name;
+    }
     public void setFlight(String flight) {
         this.flight = flight;
     }
@@ -122,4 +118,31 @@ public class Customer {
         this.Age = Age;
     }
 
+    public Customer(String name, String email, String phoneNumber, String gender, String age, String date, String flight, String departTime) {
+        this.Name = name;
+        this.Email = email;
+        this.PhoneNumber = phoneNumber;
+        this.Gender = gender;
+        this.Age = Integer.parseInt(age);
+        this.date = date;
+        this.flight = flight;
+        this.DepartTime = departTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "Name='" + Name + '\'' +
+                ", flight='" + flight + '\'' +
+                ", Email='" + Email + '\'' +
+                ", PhoneNumber='" + PhoneNumber + '\'' +
+                ", Gender='" + Gender + '\'' +
+                ", ETA='" + ETA + '\'' +
+                ", DepartTime='" + DepartTime + '\'' +
+                ", TotalPrice=" + TotalPrice +
+                ", BoardingPassNumber=" + BoardingPassNumber +
+                ", Age=" + Age +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }
