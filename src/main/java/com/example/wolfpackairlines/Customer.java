@@ -1,7 +1,6 @@
 package com.example.wolfpackairlines;
 
 public class Customer {
-
     private String First_Name;
     private String Last_Name;
     private String flight;
@@ -13,6 +12,7 @@ public class Customer {
     private double TotalPrice;
     private int BoardingPassNumber;
     private int Age;
+
 
 
     public String getFirst_Name()
