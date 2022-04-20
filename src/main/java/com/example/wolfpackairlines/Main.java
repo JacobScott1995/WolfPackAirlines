@@ -2,6 +2,7 @@ package com.example.wolfpackairlines;
 
 import View.SceneController;
 import javafx.application.Application;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;

@@ -4,7 +4,6 @@ public class Customer {
 
     private String First_Name;
     private String Last_Name;
-
     private String flight;
     private String Email;
     private String PhoneNumber;
