@@ -84,6 +84,18 @@ public class Display {
         customerInfo.add(depart.getText());
     }
 
+    private boolean nameValidation() {
+        return name.getText().length() >= 3 && name.getText().length() != 0;
+    }
+
+    private boolean emailValidation() {
+        return email.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
+    }
+
+    private boolean phoneValidation() {
+        return phone.getText().matches("\\\\d{10}");
+    }
+
     private void addLogo(){
         ImageView wolfLogo = new ImageView("wolf_logo.jpg");
         wolfLogo.setFitHeight(64);
