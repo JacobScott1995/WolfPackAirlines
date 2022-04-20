@@ -14,10 +14,6 @@ public class Customer {
     private int Age;
     private String date;
 
-
-
-
-
     public String getDate() {
         return date;
     }
