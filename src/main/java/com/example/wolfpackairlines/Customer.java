@@ -11,7 +11,7 @@ public class Customer {
     private String Gender;
     private String ETA;
     private String DepartTime;
-    private String TotalPrice;
+    private double TotalPrice;
     private int BoardingPassNumber;
     private int Age;
 
@@ -106,12 +106,12 @@ public class Customer {
         this.DepartTime = DepartTime;
     }
 
-    public String getTotalPrice()
+    public double getTotalPrice()
     {
         return this.TotalPrice;
     }
 
-    public void setTotalPrice(String TotalPrice)
+    public void setTotalPrice(double TotalPrice)
     {
         this.TotalPrice = TotalPrice;
     }
