@@ -8,21 +8,6 @@ import java.nio.file.Path;
 import java.util.*;
 
 public  class Flight {
-    // Create HashMap to hold Flight as key and time for value
-
-//    "Flight Origin","Flight Destination","Flight Time in Minutes"
-//            "Atlanta (ATL)","Ft. Lauderdale (FLL)","120"
-//            "Atlanta (ATL)","New York (LGA)","390"
-//            "Denver (DEN)","Los Angeles (LAX)","386"
-//            "Los Angeles (LAX)","Seattle (SEA)","300"
-//            "Las Vegas (LAS)","Los Angeles (LAX)","68"
-//            "Atlanta (ALT)","Orlando (MCO)","95"
-//            "Los Angeles (LAX)","Chicago (ORD)","242"
-//            "New York (LGA)","Chicago (ORD)","155"
-//            "Los Angeles (LAX)","San Francisco (SFO)","94"
-//            "New York (JFK)","Los Angeles (LAX)","326"
-
-
     static HashMap<String, Integer> flights = new HashMap<>();
 
     public static void addFlights(){
@@ -42,11 +27,6 @@ public  class Flight {
     public static int time(String flight){
     return flights.get(flight);
     }
-
-
-
-
-
 
 }
 
