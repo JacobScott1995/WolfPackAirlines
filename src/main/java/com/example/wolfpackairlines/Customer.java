@@ -4,14 +4,14 @@ public class Customer {
 
     private String First_Name;
     private String Last_Name;
-    private String Origin;
-    private String Destination;
+
+    private String flight;
     private String Email;
     private String PhoneNumber;
     private String Gender;
     private String ETA;
     private String DepartTime;
-    private String TotalPrice;
+    private double TotalPrice;
     private int BoardingPassNumber;
     private int Age;
 
@@ -36,26 +36,13 @@ public class Customer {
         this.Last_Name = Last_Name;
     }
 
-    public String getOrigin()
-    {
-        return this.Origin;
+    public String getFlight() {
+        return flight;
     }
 
-    public void setOrigin(String Origin)
-    {
-        this.Origin = Origin;
+    public void setFlight(String flight) {
+        this.flight = flight;
     }
-
-    public String getDestination()
-    {
-        return this.Destination;
-    }
-
-    public void setDestination(String Destination)
-    {
-        this.Destination = Destination;
-    }
-
     public String getEmail()
     {
         return this.Email;
@@ -106,12 +93,12 @@ public class Customer {
         this.DepartTime = DepartTime;
     }
 
-    public String getTotalPrice()
+    public double getTotalPrice()
     {
         return this.TotalPrice;
     }
 
-    public void setTotalPrice(String TotalPrice)
+    public void setTotalPrice(double TotalPrice)
     {
         this.TotalPrice = TotalPrice;
     }
