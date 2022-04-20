@@ -20,17 +20,27 @@ import java.util.ArrayList;
 public class Display {
     private final AnchorPane displayPane;
     private final Scene displayScene;
-    private final ArrayList<String> customer = new ArrayList<>();
+    private ArrayList<String> customer = new ArrayList<>();
+    private ArrayList<String> customerInfo = new ArrayList<>();
     private final AnchorPane mainDiv = new AnchorPane();
+    private TextField name;
+    private TextField email;
+    private TextField phone;
+    private TextField age;
+    private ChoiceBox<String> gender;
+    private DatePicker date;
+    private ChoiceBox<String> destinations;
+    private TextField depart;
 
     public Display(){
         displayPane = new AnchorPane();
         displayScene = new Scene(displayPane, SceneController.WIDTH,SceneController.HEIGHT);
         displayScene.getRoot().setStyle("-fx-font-family: 'serif'");
         setTitle();
+        addTextFields();
         setDivPos();
+        addButton();
         addLogo();
-        textFields();
     }
 
     private void setTitle(){
@@ -52,6 +62,28 @@ public class Display {
         displayPane.getChildren().add(subTitle);
     }
 
+    private void addTextFields(){
+        nameInput();
+        emailInput();
+        phoneNumber();
+        genderInput();
+        ageInput();
+        dateInput();
+        flights();
+        departureTime();
+    }
+
+    private void getText(){
+        customerInfo.add(name.getText());
+        customerInfo.add(email.getText());
+        customerInfo.add(phone.getText());
+        customerInfo.add(gender.getValue());
+        customerInfo.add(age.getText());
+        customerInfo.add(String.valueOf(date.getValue()));
+        customerInfo.add(destinations.getValue());
+        customerInfo.add(depart.getText());
+    }
+
     private void addLogo(){
         ImageView wolfLogo = new ImageView("wolf_logo.jpg");
         wolfLogo.setFitHeight(64);
@@ -63,7 +95,7 @@ public class Display {
         mainDiv.setLayoutX(400);
         mainDiv.setLayoutY(200);
         mainDiv.setPrefWidth(300);
-        mainDiv.setPrefHeight(400);
+        mainDiv.setPrefHeight(500);
         mainDiv.setStyle("-fx-background-color: #1b2b50;-fx-background-radius: 20;-fx-border-width: 3px;-fx-border-color: black;-fx-border-radius: 20;");
         displayPane.getChildren().add(mainDiv);
     }
@@ -72,16 +104,6 @@ public class Display {
         return displayScene;
     }
 
-    private void textFields(){
-        nameInput();
-        ageInput();
-        emailInput();
-        phoneNumber();
-        genderInput();
-        dateInput();
-        flights();
-        departureTime();
-    }
 
     public ArrayList<String> getInput(){
         return customer;
@@ -90,22 +112,19 @@ public class Display {
     private void nameInput(){
         Label label = new Label("Name: ");
         label.setTextFill(Color.WHITE);
-        TextField textField = new TextField();
-        customer.add(textField.getText());
+        name = new TextField();
         VBox vBox = new VBox();
         vBox.setLayoutX(75);
-        vBox.getChildren().addAll(label, textField);
+        vBox.getChildren().addAll(label, name);
         mainDiv.getChildren().add(vBox);
-
     }
 
     private void emailInput(){
         Label label = new Label("E-mail: ");
         label.setTextFill(Color.WHITE);
-        TextField textField = new TextField();
-        customer.add(textField.getText());
+        email = new TextField();
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(label, textField);
+        vBox.getChildren().addAll(label, email);
         vBox.setLayoutX(75);
         vBox.setLayoutY(50);
         mainDiv.getChildren().add(vBox);
@@ -114,10 +133,9 @@ public class Display {
     private void phoneNumber(){
         Label label = new Label("Phone Number: ");
         label.setTextFill(Color.WHITE);
-        TextField textField = new TextField();
-        customer.add(textField.getText());
+        phone = new TextField();
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(label, textField);
+        vBox.getChildren().addAll(label, phone);
         vBox.setLayoutX(75);
         vBox.setLayoutY(100);
         mainDiv.getChildren().add(vBox);
@@ -127,9 +145,10 @@ public class Display {
         Label label = new Label("Gender: ");
         label.setTextFill(Color.WHITE);
 
-        ChoiceBox<String> gender = new ChoiceBox<>();
+        gender = new ChoiceBox<>();
         gender.getItems().add("Male");
         gender.getItems().add("Female");
+
 
         VBox vBox = new VBox();
         vBox.getChildren().addAll(label, gender);
@@ -141,10 +160,9 @@ public class Display {
     private void ageInput(){
         Label label = new Label("Age: ");
         label.setTextFill(Color.WHITE);
-        TextField textField = new TextField();
-        customer.add(textField.getText());
+        age = new TextField();
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(label, textField);
+        vBox.getChildren().addAll(label, age);
         vBox.setLayoutX(75);
         vBox.setLayoutY(200);
         mainDiv.getChildren().add(vBox);
@@ -153,7 +171,7 @@ public class Display {
     private void dateInput(){
         Label label = new Label("Date: ");
         label.setTextFill(Color.WHITE);
-        DatePicker date = new DatePicker(LocalDate.now());
+        date = new DatePicker(LocalDate.now());
         date.setDayCellFactory(picker -> new DateCell(){
             public void updateItem(LocalDate date, boolean empty){
                 super.updateItem(date, empty);
@@ -162,6 +180,8 @@ public class Display {
                 setDisable(empty || date.compareTo(today) < 0);
             }
         });
+
+
 
         VBox vBox = new VBox();
         vBox.getChildren().addAll(label, date);
@@ -173,7 +193,7 @@ public class Display {
     private void flights(){
         Label label = new Label("Flights: ");
         label.setTextFill(Color.WHITE);
-        ChoiceBox<String> destinations = new ChoiceBox<>();
+        destinations = new ChoiceBox<>();
         destinations.getItems().add("Atlanta (ATL) to Ft. Lauderdale (FLL)");
         destinations.getItems().add("Atlanta (ATL) to New York (LGA)");
         destinations.getItems().add("Denver (DEN) to Los Angeles (LAX)");
@@ -185,7 +205,7 @@ public class Display {
         destinations.getItems().add("Los Angeles (LAX) to San Francisco (SFO)");
         destinations.getItems().add("New York (JFK) to Los Angeles (LAX)");
 
-        customer.add(destinations.getValue());
+
         VBox vBox = new VBox();
         vBox.getChildren().addAll(label, destinations);
         vBox.setLayoutX(75);
@@ -196,17 +216,27 @@ public class Display {
     private void departureTime(){
         Label label = new Label("Departure: ");
         label.setTextFill(Color.WHITE);
-        TextField textField = new TextField();
-        customer.add(textField.getText());
-        Button depBtn = new Button("Submit");
-        depBtn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-        depBtn.setOnMouseEntered(mouseEvent -> depBtn.setEffect(new DropShadow()));
-        depBtn.setOnMouseExited(mouseEvent -> depBtn.setEffect(null));
+        depart = new TextField();
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(label, textField, depBtn);
+        vBox.getChildren().addAll(label, depart);
         vBox.setLayoutX(75);
         vBox.setLayoutY(350);
         mainDiv.getChildren().add(vBox);
     }
+
+    private void addButton(){
+        Button submit = new Button("Submit");
+        submit.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+        submit.setOnMouseEntered(mouseEvent -> submit.setEffect(new DropShadow()));
+        submit.setOnMouseExited(mouseEvent -> submit.setEffect(null));
+        submit.setOnMouseClicked(mouseEvent -> {
+            getText();
+            System.out.println(customerInfo);
+        });
+        mainDiv.getChildren().add(submit);
+        submit.setLayoutX(75);
+        submit.setLayoutY(400);
+    }
+
 }
