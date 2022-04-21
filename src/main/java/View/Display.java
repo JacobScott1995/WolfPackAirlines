@@ -15,7 +15,6 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -218,6 +217,31 @@ public class Display {
         mainDiv.getChildren().add(vBox);
     }
 
+    private String formatMinutes(String minutes) {
+        switch (minutes) {
+            case ("0"):
+                return "00";
+            case ("1"):
+                return "01";
+            case ("2"):
+                return "02";
+            case ("3"):
+                return "03";
+            case ("4"):
+                return "04";
+            case ("5"):
+                return "05";
+            case ("6"):
+                return "06";
+            case ("7"):
+                return "08";
+            case ("9"):
+                return "09";
+            default:
+                return minutes;
+        }
+    }
+
     public String eta(int flightTime, String departureTime) {
         int departureHour = Integer.parseInt(departureTime.substring(0, 2));
         int departureMinutes = Integer.parseInt(departureTime.substring(2));
@@ -226,7 +250,7 @@ public class Display {
         int arriveHour = departureHour + addHours;
         int arriveMinutes = departureMinutes + addMinutes;
 
-        return String.valueOf(arriveHour + arriveMinutes);
+        return String.valueOf(arriveHour) + formatMinutes(String.valueOf(arriveMinutes));
     }
 
     private void addButton(){
@@ -243,7 +267,11 @@ public class Display {
                     customer.setBoardingPassNumber(NumberGen.SetPassID());
                     customer.setTotalPrice(TicketDiscount.ticketDiscount(customer.getAge(),customer.getGender(),price));
                     customer.setETA(eta(flight.get(customer.getFlight()),customer.getDepartTime()));
+
                     File_Writer.addCustomerData(customer);
+
+                    BoardingPass pass = new BoardingPass(customer);
+                    SceneController.setScene(pass.getPassScene());
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);
                     a.setTitle("Error");
