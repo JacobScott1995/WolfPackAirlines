@@ -219,6 +219,17 @@ public class Display {
         mainDiv.getChildren().add(vBox);
     }
 
+    public String eta(int flightTime, String departureTime) {
+        int departureHour = Integer.parseInt(departureTime.substring(0, 2));
+        int departureMinutes = Integer.parseInt(departureTime.substring(2));
+        int addHours = flightTime / 60;
+        int addMinutes = flightTime % 60;
+        int arriveHour = departureHour + addHours;
+        int arriveMinutes = departureMinutes + addMinutes;
+
+        return String.valueOf(arriveHour + arriveMinutes);
+    }
+
     private void addButton(){
         Button submit = new Button("Submit");
         submit.setStyle("-fx-background-color: green; -fx-text-fill: white;");
