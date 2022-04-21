@@ -2,6 +2,7 @@ package View;
 
 import com.example.wolfpackairlines.Customer;
 import com.example.wolfpackairlines.File_Writer;
+
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -14,19 +15,16 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
+
+
 
 
 public class Display {
     private final AnchorPane displayPane;
     private final Scene displayScene;
-    private ArrayList<String> customer = new ArrayList<>();
-    private ArrayList<String> customerInfo = new ArrayList<>();
     private final AnchorPane mainDiv = new AnchorPane();
     private TextField name;
     private TextField email;
@@ -78,19 +76,10 @@ public class Display {
         departureTime();
     }
 
-//    private void getText(){
-//        customerInfo.add(name.getText());
-//        customerInfo.add(email.getText());
-//        customerInfo.add(phone.getText());
-//        customerInfo.add(gender.getValue());
-//        customerInfo.add(age.getText());
-//        customerInfo.add(String.valueOf(date.getValue()));
-//        customerInfo.add(destinations.getValue());
-//        customerInfo.add(depart.getValue());
-//    }
-public Customer newCustomer(){
-    return new Customer(name.getText(), email.getText(), phone.getText(), gender.getValue(), age.getText(), String.valueOf(date.getValue()), destinations.getValue(), depart.getValue());
-}
+
+    public Customer newCustomer(){
+        return new Customer(name.getText(), email.getText(), phone.getText(), gender.getValue(), age.getText(), String.valueOf(date.getValue()), destinations.getValue(), depart.getValue());
+    }
 
     private void addLogo(){
         ImageView wolfLogo = new ImageView("wolf_logo.jpg");
@@ -110,11 +99,6 @@ public Customer newCustomer(){
 
     public Scene getDisplayScene() {
         return displayScene;
-    }
-
-
-    public ArrayList<String> getInput(){
-        return customer;
     }
 
     private void nameInput(){
@@ -189,8 +173,6 @@ public Customer newCustomer(){
             }
         });
 
-
-
         VBox vBox = new VBox();
         vBox.getChildren().addAll(label, date);
         vBox.setLayoutX(75);
@@ -244,10 +226,19 @@ public Customer newCustomer(){
         submit.setOnMouseExited(mouseEvent -> submit.setEffect(null));
         submit.setOnMouseClicked(mouseEvent -> {
             try {
+                if(validateFormData()){
                 File_Writer.addCustomerData(newCustomer());
+                } else {
+                    Alert a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("Error");
+                    a.setHeaderText("Error Info Invalid");
+                    a.setContentText("Please make sure all fields are filled out\nMake sure data is valid before submitting");
+                    a.show();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         });
         mainDiv.getChildren().add(submit);
         submit.setLayoutX(75);
@@ -297,7 +288,7 @@ public Customer newCustomer(){
 
     private boolean departureValidation() {
         //regex to make sure the departure time is formatted correctly (ex. 12:30pm)
-        return depart.getText().matches("\\d{4}");
+        return depart.getValue().matches("\\d{4}");
     }
 
     private boolean validateFormData() {
