@@ -1,5 +1,8 @@
 package View;
 
+import com.example.wolfpackairlines.Customer;
+import com.example.wolfpackairlines.File_Writer;
+
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -12,16 +15,16 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+
+
 
 
 public class Display {
     private final AnchorPane displayPane;
     private final Scene displayScene;
-    private ArrayList<String> customer = new ArrayList<>();
-    private ArrayList<String> customerInfo = new ArrayList<>();
     private final AnchorPane mainDiv = new AnchorPane();
     private TextField name;
     private TextField email;
@@ -30,7 +33,7 @@ public class Display {
     private ChoiceBox<String> gender;
     private DatePicker date;
     private ChoiceBox<String> destinations;
-    private TextField depart;
+    private ChoiceBox<String> depart;
 
     public Display(){
         displayPane = new AnchorPane();
@@ -73,15 +76,9 @@ public class Display {
         departureTime();
     }
 
-    private void getText(){
-        customerInfo.add(name.getText());
-        customerInfo.add(email.getText());
-        customerInfo.add(phone.getText());
-        customerInfo.add(gender.getValue());
-        customerInfo.add(age.getText());
-        customerInfo.add(String.valueOf(date.getValue()));
-        customerInfo.add(destinations.getValue());
-        customerInfo.add(depart.getText());
+
+    public Customer newCustomer(){
+        return new Customer(name.getText(), email.getText(), phone.getText(), gender.getValue(), age.getText(), String.valueOf(date.getValue()), destinations.getValue(), depart.getValue());
     }
 
     private void addLogo(){
@@ -102,11 +99,6 @@ public class Display {
 
     public Scene getDisplayScene() {
         return displayScene;
-    }
-
-
-    public ArrayList<String> getInput(){
-        return customer;
     }
 
     private void nameInput(){
@@ -181,8 +173,6 @@ public class Display {
             }
         });
 
-
-
         VBox vBox = new VBox();
         vBox.getChildren().addAll(label, date);
         vBox.setLayoutX(75);
@@ -216,7 +206,11 @@ public class Display {
     private void departureTime(){
         Label label = new Label("Departure: ");
         label.setTextFill(Color.WHITE);
-        depart = new TextField();
+        depart = new ChoiceBox<>();
+        depart.getItems().add("0600");
+        depart.getItems().add("0900");
+        depart.getItems().add("1200");
+        depart.getItems().add("1500");
 
         VBox vBox = new VBox();
         vBox.getChildren().addAll(label, depart);
@@ -231,12 +225,73 @@ public class Display {
         submit.setOnMouseEntered(mouseEvent -> submit.setEffect(new DropShadow()));
         submit.setOnMouseExited(mouseEvent -> submit.setEffect(null));
         submit.setOnMouseClicked(mouseEvent -> {
-            getText();
-            System.out.println(customerInfo);
+            try {
+                if(validateFormData()){
+                File_Writer.addCustomerData(newCustomer());
+                } else {
+                    Alert a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("Error");
+                    a.setHeaderText("Error Info Invalid");
+                    a.setContentText("Please make sure all fields are filled out\nMake sure data is valid before submitting");
+                    a.show();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         });
         mainDiv.getChildren().add(submit);
         submit.setLayoutX(75);
         submit.setLayoutY(400);
     }
 
+    private boolean nameValidation() {
+        //A name must be first name and last name separated by space (Ray Alva). Can include Upper and Lower case.
+        return name.getText().matches("([A-Za-z]*) ([A-Za-z]*)");
+    }
+
+    private boolean emailValidation() {
+        //regex to match correct email format
+        return email.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
+    }
+
+    private boolean phoneValidation() {
+        //regex to check that phone number is ten numbers.
+        return phone.getText().matches("\\d{10}");
+    }
+
+    private boolean genderValidation() {
+        //Checks if gender is either Male or Female.
+        return gender.getValue().equals("Male") || gender.getValue().equals("Female");
+    }
+
+    private boolean ageValidation() {
+        //Checks if age is from 1 - 100.
+        return age.getText().matches("^[1-9]?[0-9]{1}$|^100$");
+    }
+
+    private boolean dateValidation() {
+        try{
+            //If attempt to parse local date is successful date is valid
+            DateTimeFormatter f = DateTimeFormatter.ofPattern( "uuuu-MM-dd" ) ;
+            LocalDate ld = LocalDate.parse(String.valueOf(date.getValue()) ,f );
+            return true;
+        } catch ( Exception e ) {
+            return false;
+        }
+    }
+
+    private boolean destinationValidation() {
+        //checks to see if the destinations contains the user input.
+        return destinations.getItems().contains(destinations.getValue());
+    }
+
+    private boolean departureValidation() {
+        //regex to make sure the departure time is formatted correctly (ex. 12:30pm)
+        return depart.getValue().matches("\\d{4}");
+    }
+
+    private boolean validateFormData() {
+        return nameValidation() && emailValidation() && phoneValidation() && genderValidation() && ageValidation() && dateValidation() && destinationValidation() && departureValidation();
+    }
 }

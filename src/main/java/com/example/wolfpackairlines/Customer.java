@@ -15,9 +15,6 @@ public class Customer {
     private String date;
 
 
-
-
-
     public String getDate() {
         return date;
     }
