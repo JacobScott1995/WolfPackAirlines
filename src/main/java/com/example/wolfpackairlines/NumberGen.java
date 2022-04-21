@@ -65,15 +65,16 @@ public class NumberGen {
         else throw new RuntimeException("Something went wrong here....");
     }
 
+    public static int SetPassID()
+    {
+        GenerateUnique();
 
-    public static void main(String[] args) {
-
-      GenerateUnique();
-      
-       while(!UniqueCheck(UUID))
-       {
-           GenerateUnique();
-       }
+        while(!UniqueCheck(UUID))
+        {
+            GenerateUnique();
+        }
         FileInput(UUID);
+
+        return UUID;
     }
 }
