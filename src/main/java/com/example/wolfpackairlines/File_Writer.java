@@ -13,8 +13,8 @@ public class File_Writer {
     public static void main(String[] args) throws IOException {
 
 
-    
     }
+
     // Method to collect customer data and set to csv file
     public static void addCustomerData(Customer customer) throws IOException {
         File file = new File("src/main/resources/Boarding_Pass_Data.csv");
@@ -35,3 +35,4 @@ public class File_Writer {
 
         writer.close();
     }
+}

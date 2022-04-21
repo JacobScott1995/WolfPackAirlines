@@ -17,7 +17,7 @@ public class SceneController {
         Image icon = new Image(ICON_PATH);
         mainStage.setTitle("Wolf Pack Airlines");
         mainStage.getIcons().add(icon);
-
+        mainStage.setResizable(false);
         mainStage.setScene(displayScene);
     }
 
