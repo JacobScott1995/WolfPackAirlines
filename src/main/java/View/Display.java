@@ -247,7 +247,6 @@ public class Display {
         int addMinutes = flightTime % 60;
         int arriveHour = departureHour + addHours;
         int arriveMinutes = departureMinutes + addMinutes;
-
         return String.valueOf(arriveHour) + formatMinutes(String.valueOf(arriveMinutes));
     }
 

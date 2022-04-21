@@ -1,6 +1,11 @@
 package View;
 
 import com.example.wolfpackairlines.Customer;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -12,6 +17,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Formatter;
 
 
@@ -21,7 +28,7 @@ public class BoardingPass {
     private final AnchorPane mainDiv = new AnchorPane();
     private Customer customer;
 
-    public BoardingPass(Customer customer){
+    public BoardingPass(Customer customer) throws DocumentException, IOException {
         this.customer = customer;
         passPane = new AnchorPane();
         passScene = new Scene(passPane, SceneController.WIDTH, SceneController.HEIGHT);
@@ -30,6 +37,9 @@ public class BoardingPass {
         addLogo();
         setDivPos();
         addTextInfo();
+        CreatePDF();
+
+
     }
 
     public Scene getPassScene() {
@@ -235,9 +245,32 @@ public class BoardingPass {
         vBox.setLayoutY(450);
         mainDiv.getChildren().add(vBox);
     }
-
-
-
-
-
+    private void CreatePDF() throws IOException, DocumentException {
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(customer.getName() + " Ticket.pdf"));
+        document.open();
+        Paragraph a = new Paragraph("Name: " + customer.getName());
+        document.add(a);
+        Chunk c = new Chunk("Age: " + customer.getAge());
+        document.add(c);
+        Paragraph b = new Paragraph("Gender: " + customer.getGender());
+        document.add(b);
+        Chunk d = new Chunk("Email: " + customer.getEmail());
+        document.add(d);
+        Paragraph e = new Paragraph("Phone Number: " + customer.getPhoneNumber());
+        document.add(e);
+        Chunk f = new Chunk("Date: " + customer.getDate());
+        document.add(f);
+        Paragraph g = new Paragraph("Flight: " + customer.getFlight());
+        document.add(g);
+        Chunk h = new Chunk("Estimated Arrival Time: " + customer.getETA());
+        document.add(h);
+        Paragraph i = new Paragraph("Boarding Pass Number: " + customer.getBoardingPassNumber());
+        document.add(i);
+        Formatter formatter = new Formatter();
+        formatter.format("%.2f", customer.getTotalPrice());
+        Chunk j = new Chunk("Total Price: $" + formatter);
+        document.add(j);
+        document.close();
+    }
 }
