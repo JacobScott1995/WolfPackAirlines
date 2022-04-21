@@ -271,7 +271,7 @@ public Customer newCustomer(){
 
     private boolean genderValidation() {
         //Checks if gender is either Male or Female.
-        return gender.getValue() == "Male" || gender.getValue() == "Female";
+        return gender.getValue().equals("Male") || gender.getValue().equals("Female");
     }
 
     private boolean ageValidation() {
@@ -301,9 +301,6 @@ public Customer newCustomer(){
     }
 
     private boolean validateFormData() {
-        if (nameValidation() && emailValidation() && phoneValidation() && genderValidation() && ageValidation() && dateValidation() && destinationValidation() && departureValidation()) {
-            return true;
-        }
-        return false;
+        return nameValidation() && emailValidation() && phoneValidation() && genderValidation() && ageValidation() && dateValidation() && destinationValidation() && departureValidation();
     }
 }
