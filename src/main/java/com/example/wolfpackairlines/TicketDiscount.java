@@ -2,7 +2,7 @@ package com.example.wolfpackairlines;
 
 public class TicketDiscount {
 
-    public double ticketDiscount(int age, String gender, double originalPrice) {
+    public static double ticketDiscount(int age, String gender, double originalPrice) {
         double newPrice;
         if (age <= 12) {
             newPrice = originalPrice - (originalPrice * .50);

@@ -21,17 +21,20 @@ public class File_Writer {
 
         FileWriter outputfile = new FileWriter(file, true);
         CSVWriter writer = new CSVWriter(outputfile);
-        String[] custFields = new String[9];
+        String[] custFields = new String[11];
         custFields[0] = customer.getName();
         custFields[1] = customer.getEmail();
         custFields[2] = customer.getPhoneNumber();
         custFields[3] = customer.getGender();
         custFields[4] = String.valueOf(customer.getAge());
         custFields[5] = customer.getDate();
-        custFields[6] = customer.getDepartTime();
-        custFields[7] = customer.getFlight();
-        custFields[8] = customer.getDepartTime();
+        custFields[6] = customer.getFlight();
+        custFields[7] = customer.getDepartTime();
+        custFields[8] = customer.getETA();
+        custFields[9] = String.valueOf(customer.getBoardingPassNumber());
+        custFields[10] = String.valueOf(customer.getTotalPrice());
         writer.writeNext(custFields);
 
         writer.close();
+    }
     }

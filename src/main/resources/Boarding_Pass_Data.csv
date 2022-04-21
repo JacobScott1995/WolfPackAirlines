@@ -1,2 +1,2 @@
-"Name","Email","Phone Number","Gender","Age","Date","Destination","Departure Time"
-"john","googledood@gmail.com","777 999 1717","Male","463","2022-04-30","0900","Denver (DEN) to Los Angeles (LAX)","0900"
+"Name","Email","Phone Number","Gender","Age","Date","Flight","Departure Time","ETA","Boarding Pass","Price"
+

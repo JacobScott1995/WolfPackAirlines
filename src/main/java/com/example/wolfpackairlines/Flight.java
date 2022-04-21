@@ -10,7 +10,7 @@ import java.util.*;
 public  class Flight {
     static HashMap<String, Integer> flights = new HashMap<>();
 
-    public static void addFlights(){
+    public static HashMap<String,Integer> addFlights(){
         flights.put("Atlanta (ATL) to Ft. Lauderdale (FLL)", 120);
         flights.put("Atlanta (ATL) to New York (LGA)", 390);
         flights.put("Denver (DEN) to Los Angeles (LAX)", 386);
@@ -22,6 +22,7 @@ public  class Flight {
         flights.put("Los Angeles (LAX) to San Francisco (SFO)", 94);
         flights.put("New York (JFK) to Los Angeles (LAX)", 326);
 
+        return flights;
     }
 
     public static int time(String flight){
