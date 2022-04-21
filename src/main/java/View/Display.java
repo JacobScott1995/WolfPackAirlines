@@ -1,7 +1,7 @@
 package View;
 
 import com.example.wolfpackairlines.Customer;
-import com.example.wolfpackairlines.File_Writer;
+import com.example.wolfpackairlines.*;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -18,8 +18,7 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-
+import java.util.HashMap;
 
 
 public class Display {
@@ -238,7 +237,13 @@ public class Display {
         submit.setOnMouseClicked(mouseEvent -> {
             try {
                 if(validateFormData()){
-                File_Writer.addCustomerData(newCustomer());
+                    HashMap<String,Integer> flight = Flight.addFlights();
+                    Customer customer = newCustomer();
+                    double price = Price.generate(flight.get(customer.getFlight()));
+                    customer.setBoardingPassNumber(NumberGen.SetPassID());
+                    customer.setTotalPrice(TicketDiscount.ticketDiscount(customer.getAge(),customer.getGender(),price));
+                    customer.setETA(eta(flight.get(customer.getFlight()),customer.getDepartTime()));
+                    File_Writer.addCustomerData(customer);
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);
                     a.setTitle("Error");
@@ -246,7 +251,7 @@ public class Display {
                     a.setContentText("Please make sure all fields are filled out\nMake sure data is valid before submitting");
                     a.show();
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
