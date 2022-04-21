@@ -1,8 +1,6 @@
 package View;
 
-import com.example.wolfpackairlines.Customer;
 import com.example.wolfpackairlines.*;
-
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -15,7 +13,6 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -268,7 +265,7 @@ public class Display {
 
     private boolean emailValidation() {
         //regex to match correct email format
-        return email.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
+        return email.getText().matches("^[\\w-_.+]*[\\w-_.]@(\\w+\\.)+\\w+\\w$");
     }
 
     private boolean phoneValidation() {
@@ -283,14 +280,14 @@ public class Display {
 
     private boolean ageValidation() {
         //Checks if age is from 1 - 100.
-        return age.getText().matches("^[1-9]?[0-9]{1}$|^100$");
+        return age.getText().matches("^[1-9]?\\d$|^100$");
     }
 
     private boolean dateValidation() {
         try{
             //If attempt to parse local date is successful date is valid
             DateTimeFormatter f = DateTimeFormatter.ofPattern( "uuuu-MM-dd" ) ;
-            LocalDate ld = LocalDate.parse(String.valueOf(date.getValue()) ,f );
+            LocalDate.parse(String.valueOf(date.getValue()), f);
             return true;
         } catch ( Exception e ) {
             return false;
