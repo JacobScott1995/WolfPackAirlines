@@ -1,5 +1,7 @@
 package View;
 
+import com.example.wolfpackairlines.Customer;
+import com.example.wolfpackairlines.File_Writer;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -13,6 +15,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -30,7 +33,7 @@ public class Display {
     private ChoiceBox<String> gender;
     private DatePicker date;
     private ChoiceBox<String> destinations;
-    private TextField depart;
+    private ChoiceBox<String> depart;
 
     public Display(){
         displayPane = new AnchorPane();
@@ -73,16 +76,19 @@ public class Display {
         departureTime();
     }
 
-    private void getText(){
-        customerInfo.add(name.getText());
-        customerInfo.add(email.getText());
-        customerInfo.add(phone.getText());
-        customerInfo.add(gender.getValue());
-        customerInfo.add(age.getText());
-        customerInfo.add(String.valueOf(date.getValue()));
-        customerInfo.add(destinations.getValue());
-        customerInfo.add(depart.getText());
-    }
+//    private void getText(){
+//        customerInfo.add(name.getText());
+//        customerInfo.add(email.getText());
+//        customerInfo.add(phone.getText());
+//        customerInfo.add(gender.getValue());
+//        customerInfo.add(age.getText());
+//        customerInfo.add(String.valueOf(date.getValue()));
+//        customerInfo.add(destinations.getValue());
+//        customerInfo.add(depart.getValue());
+//    }
+public Customer newCustomer(){
+    return new Customer(name.getText(), email.getText(), phone.getText(), gender.getValue(), age.getText(), String.valueOf(date.getValue()), destinations.getValue(), depart.getValue());
+}
 
     private void addLogo(){
         ImageView wolfLogo = new ImageView("wolf_logo.jpg");
@@ -216,7 +222,11 @@ public class Display {
     private void departureTime(){
         Label label = new Label("Departure: ");
         label.setTextFill(Color.WHITE);
-        depart = new TextField();
+        depart = new ChoiceBox<>();
+        depart.getItems().add("0600");
+        depart.getItems().add("0900");
+        depart.getItems().add("1200");
+        depart.getItems().add("1500");
 
         VBox vBox = new VBox();
         vBox.getChildren().addAll(label, depart);
@@ -231,8 +241,11 @@ public class Display {
         submit.setOnMouseEntered(mouseEvent -> submit.setEffect(new DropShadow()));
         submit.setOnMouseExited(mouseEvent -> submit.setEffect(null));
         submit.setOnMouseClicked(mouseEvent -> {
-            getText();
-            System.out.println(customerInfo);
+            try {
+                File_Writer.addCustomerData(newCustomer());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         mainDiv.getChildren().add(submit);
         submit.setLayoutX(75);
