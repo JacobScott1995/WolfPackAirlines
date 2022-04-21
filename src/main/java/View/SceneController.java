@@ -24,4 +24,8 @@ public class SceneController {
     public Stage getMainStage() {
         return mainStage;
     }
+
+    public static void setScene(Scene scene){
+        mainStage.setScene(scene);
+    }
 }
