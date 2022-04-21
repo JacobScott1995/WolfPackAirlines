@@ -14,6 +14,8 @@ import javafx.scene.text.Text;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 
@@ -239,4 +241,56 @@ public class Display {
         submit.setLayoutY(400);
     }
 
+    private boolean nameValidation() {
+        //A name must be first name and last name separated by space (Ray Alva). Can include Upper and Lower case.
+        return name.getText().matches("([A-Za-z]*) ([A-Za-z]*)");
+    }
+
+    private boolean emailValidation() {
+        //regex to match correct email format
+        return email.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
+    }
+
+    private boolean phoneValidation() {
+        //regex to check that phone number is ten numbers.
+        return phone.getText().matches("\\d{10}");
+    }
+
+    private boolean genderValidation() {
+        //Checks if gender is either Male or Female.
+        return gender.getValue() == "Male" || gender.getValue() == "Female";
+    }
+
+    private boolean ageValidation() {
+        //Checks if age is from 1 - 100.
+        return age.getText().matches("^[1-9]?[0-9]{1}$|^100$");
+    }
+
+    private boolean dateValidation() {
+        try{
+            //If attempt to parse local date is successful date is valid
+            DateTimeFormatter f = DateTimeFormatter.ofPattern( "uuuu-MM-dd" ) ;
+            LocalDate ld = LocalDate.parse(String.valueOf(date.getValue()) ,f );
+            return true;
+        } catch ( Exception e ) {
+            return false;
+        }
+    }
+
+    private boolean destinationValidation() {
+        //checks to see if the destinations contains the user input.
+        return destinations.getItems().contains(destinations.getValue());
+    }
+
+    private boolean departureValidation() {
+        //regex to make sure the departure time is formatted correctly (ex. 12:30pm)
+        return depart.getText().matches("\\d{4}");
+    }
+
+    private boolean validateFormData() {
+        if (nameValidation() && emailValidation() && phoneValidation() && genderValidation() && ageValidation() && dateValidation() && destinationValidation() && departureValidation()) {
+            return true;
+        }
+        return false;
+    }
 }
