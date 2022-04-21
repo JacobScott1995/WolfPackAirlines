@@ -13,31 +13,25 @@ public class File_Writer {
     public static void main(String[] args) throws IOException {
 
 
+    
     }
     // Method to collect customer data and set to csv file
     public static void addCustomerData(Customer customer) throws IOException {
-
-        ArrayList<String> customerData = new ArrayList<>(); // Creating a List of Customer input from Customer object
-        customerData.add(customer.getName());
-        customerData.add(customer.getEmail());
-        customerData.add(customer.getPhoneNumber());
-        customerData.add(customer.getGender());
-        customerData.add(String.valueOf(customer.getAge()));
-        customerData.add(customer.getDate());
-        customerData.add(customer.getFlight());
-        customerData.add(customer.getDepartTime());
-
-        String[] data = customerData.toArray(String[]::new);
-
-
-
         File file = new File("src/main/resources/Boarding_Pass_Data.csv");
 
         FileWriter outputfile = new FileWriter(file, true);
         CSVWriter writer = new CSVWriter(outputfile);
-
-        writer.writeNext(data);//Writing customer data to CSV file
+        String[] custFields = new String[9];
+        custFields[0] = customer.getName();
+        custFields[1] = customer.getEmail();
+        custFields[2] = customer.getPhoneNumber();
+        custFields[3] = customer.getGender();
+        custFields[4] = String.valueOf(customer.getAge());
+        custFields[5] = customer.getDate();
+        custFields[6] = customer.getDepartTime();
+        custFields[7] = customer.getFlight();
+        custFields[8] = customer.getDepartTime();
+        writer.writeNext(custFields);
 
         writer.close();
     }
-}
