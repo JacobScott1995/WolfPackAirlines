@@ -1,2 +1,5 @@
 "Name","Email","Phone Number","Gender","Age","Date","Flight","Departure Time","ETA","Boarding Pass","Price"
 
+"jim beam","jas@gmail.com","1234567890","Female","41","2022-04-22","Las Vegas (LAS) to Los Angeles (LAX)","0900","1008","62492","88.8"
+"aldo marnoi","123@gmail.com","1234567890","Female","41","2022-04-22","Los Angeles (LAX) to Seattle (SEA)","1200","1700","32097","315.0"
+"Jacob Sc","jra@gmail.com","1111111111","Female","51","2022-04-22","Denver (DEN) to Los Angeles (LAX)","1200","1826","96984","398.85"

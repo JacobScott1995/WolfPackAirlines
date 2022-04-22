@@ -261,6 +261,8 @@ public class BoardingPass {
         document.add(e);
         Chunk f = new Chunk("Date: " + customer.getDate());
         document.add(f);
+        Paragraph o = new Paragraph("Departure: " + customer.getDepartTime());
+        document.add(o);
         Paragraph g = new Paragraph("Flight: " + customer.getFlight());
         document.add(g);
         Chunk h = new Chunk("Estimated Arrival Time: " + customer.getETA());

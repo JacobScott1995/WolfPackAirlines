@@ -12,9 +12,9 @@ public  class Flight {
 
     public static HashMap<String,Integer> addFlights(){
         flights.put("Atlanta (ATL) to Ft. Lauderdale (FLL)", 120);
-        flights.put("Atlanta (ATL) to New York (LGA)", 390);
-        flights.put("Denver (DEN) to Los Angeles (LAX)", 386);
-        flights.put("Los Angeles (LAX) to Seattle (SEA)", 300);
+        flights.put("Atlanta (ATL) to New York (LGA)", 140);
+        flights.put("Denver (DEN) to Los Angeles (LAX)", 150);
+        flights.put("Los Angeles (LAX) to Seattle (SEA)", 170);
         flights.put("Las Vegas (LAS) to Los Angeles (LAX)", 68);
         flights.put("Atlanta (ALT) to Orlando (MCO)", 95);
         flights.put("Los Angeles (LAX) to Chicago (ORD)", 242);
