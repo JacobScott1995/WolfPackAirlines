@@ -232,6 +232,8 @@ public class Display {
             case ("6"):
                 return "06";
             case ("7"):
+                return "07";
+            case ("8"):
                 return "08";
             case ("9"):
                 return "09";
